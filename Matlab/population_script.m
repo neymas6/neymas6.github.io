@@ -1,3 +1,4 @@
+% population control problem with crops, deer, and bear. Crops are eaten by deer and deer are eaten by bear.
 
 % Experiment 1: No PID - comment out FSM, set u(i) = 0
 % Experiment 2: PID with reference 22
