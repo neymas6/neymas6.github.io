@@ -1,4 +1,5 @@
 ## Data Analysis on NCAA basketball tournament dataset
+## Dataset includes all games played in the tournament and identifying information including seed, scores, team names, year, round, region, etc.
 
 import pandas as pd
 import numpy as np
