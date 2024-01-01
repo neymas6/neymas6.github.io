@@ -65,5 +65,6 @@ eight['TeamYear'] = eight['Team'].map(str) + '-' + eight['Year'].map(str) # get 
 eight_merged1 = pd.merge(eight,bball,left_on='TeamYear',right_on='Team1Year',how='left') # left merge Team-Year of champions with all games
 eight_merged2 = pd.merge(eight,bball,left_on='TeamYear',right_on='Team2Year',how='left') # left merge Team-Year of champions with all hames
 eight_final = pd.concat([eight_merged1,eight_merged2]) # combine the two merged dfs
+
 eight_final.dropna()['MOV'].groupby(eight_final['TeamYear']).mean().sort_values(ascending=False).iloc[0:10]
     # calculate the average Margin of Victory for each champion
