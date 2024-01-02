@@ -1,1 +1,4 @@
 Purpose of this project is to visualize Barcelona geospatial data and overlay data with a signficant location and locations of bike lanes.
+
+Three figures (PNG files) show the output from the Python file.
+One file containing exported data is outputed from the Python file.
