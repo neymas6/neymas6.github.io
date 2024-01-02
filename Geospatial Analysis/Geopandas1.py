@@ -37,6 +37,32 @@ sagrada = sagrada.to_crs(epsg=2062)
 districts['sagrada'] = [float(sagrada.distance(centroid).iloc[0]) / 1000 for centroid in districts.centroid]
 
 
-# visualize the districts
+# visualize the districts (Figure_1)
 ax = districts.plot(column='NOM',figsize=(10,6),edgecolor='black',legend=True)
+plt.show()
+
+# more detailed graph using contextily (Figure_2)
+ax = districts.plot(column='NOM', figsize=(12,6), alpha = 0.5, legend=True)
+districts['centroid'].plot(ax=ax, color='green')
+sagrada.plot(ax=ax, color='black',marker='+')
+contextily.add_basemap(ax, crs=districts.crs.to_string())
+plt.title('Detailed Map of Barcelona')
+plt.axis('off')
+plt.show()
+
+
+# add data on where bike lanes are located
+bike_url = 'https://opendata-ajuntament.barcelona.cat/resources/bcn/CarrilsBici/CARRIL_BICI.geojson'
+bike_lane = gpd.read_file(bike_url)
+bike_lane = bike_lane.loc[:,['ID','geometry']]
+bike_lane.to_crs(epsg=2062, inplace=True)
+
+lanes_districts = gpd.sjoin(districts, bike_lane, how='inner', predicate='intersects')
+
+# visualize bike lanes ontop of district map (Figure_3)
+ax = lanes_districts.plot(column='NOM', figsize=(12,6), alpha = 0.5, legend=True)
+contextily.add_basemap(ax, crs=lanes_districts.crs.to_string())
+bike_lane.plot(ax=ax, color='black')
+plt.title('Detailed Map of Barcelona with bike lanes')
+plt.axis('off')
 plt.show()
